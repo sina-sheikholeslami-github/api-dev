@@ -3,7 +3,6 @@ package com.sinasheikholeslami.demo.controller;
 import java.net.URI;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +16,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.sinasheikholeslami.demo.dao.UserDao;
 import com.sinasheikholeslami.demo.exception.UserNotFoundException;
 import com.sinasheikholeslami.demo.model.User;
+
+import jakarta.validation.Valid;
 
 @RestController
 public class UserController {
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("users")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User savedUser = userDao.saveUser(user);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{id}")
