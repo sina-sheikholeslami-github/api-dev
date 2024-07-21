@@ -15,9 +15,9 @@ public class User {
 
     private Long id;
 
-    @Size(min=2)
+    @Size(min=2, message="Name should have at least 2 characters")
     private String name;
-    
-    @Past
+
+    @Past(message="Date of birth should be in the past")
     private LocalDate birthDate;
 }
